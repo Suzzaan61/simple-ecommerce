@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <><div className={'bg-slate-200'}>
             <div className={'flex justify-between items-center max-w-7xl m-auto p-4'}>
-                <h2 className={'text-xl'}>EcoMMerce</h2>
+                <h2 className={'text-xl'} >Ecommerce</h2>
                 <ul className={'flex gap-8'}>
                     <Link to={'/'}>
                         <li>Home</li>
@@ -17,6 +17,9 @@ const Header = () => {
                     </Link>
                     <Link to={'/sign-in'}>
                         <li>Signin</li>
+                    </Link>
+                    <Link to={'/admin'}>
+                        <li>Admin</li>
                     </Link>
                 </ul>
             </div>

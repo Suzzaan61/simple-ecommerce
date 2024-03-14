@@ -23,6 +23,4 @@ export const signin = async (req, res) => {
     }  catch (err){
         return res.status(400).json({error: err.message});
     }
-
-
 }

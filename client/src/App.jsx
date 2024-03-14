@@ -5,6 +5,7 @@ import Order from "./pages/Order.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import Header from "./components/Header.jsx";
+import Admin from "./pages/Admin.jsx";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                <Route path={'/Order'} element={<Order />}/>
                <Route path={'/sign-up'} element={<SignUp />}/>
                <Route path={'/sign-in'} element={<SignIn />}/>
+               <Route path={'/admin'} element={<Admin />}/>
            </Routes>
        </BrowserRouter>
     );
