@@ -1,6 +1,8 @@
 import {useState} from "react";
-
+import axios from "axios";
+import {useNavigate, useNavigation} from "react-router-dom";
 function SignUp() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({});
     const [error,setError] = useState(null);
     const [loading,setLoading] = useState(false);
@@ -8,28 +10,36 @@ function SignUp() {
     const inputHandler = (e) => {
         setFormData({...formData,[e.target.id ]: e.target.value});
     }
-    console.log(import.meta.env.REACT_APP_SERVER_URL);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
             setLoading(true);
             setError(null);
 
-            const response = await fetch(`${import.meta.env.REACT_APP_API_URL}/signup`, {
-                method: 'POST',
-                headers:{'Content-Type':'application/json'},
-                body: JSON.stringify(formData),
-            });
-            const data = await response.json();
-            console.log(data);
+            // const response = await fetch(`http://localhost:8180/api/auth/sign-up`, {
+            //     method: 'POST',
+            //     headers:{'Content-Type':'application/json'},
+            //     body: JSON.stringify(formData),
+            // });
+            // const data = await response.json();
 
+            const baseURL = `http://localhost:8180/api/auth`;
+            const res = await axios.post(`${baseURL}/sign-up`, formData);
+            console.log(res);
+
+            setLoading(false);
+            if(res.status === 200){
+                setError(false);
+                navigate('/sign-in');
+            } else{
+                setError(true);
+                return;
+            }
 
         }catch(err){
             console.log(err);
         }
-
-
-
         console.log(formData);
     }
 
@@ -69,8 +79,8 @@ function SignUp() {
                             <input
                                 type="password"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="confirm_password"
-                                id="confirm_password"
+                                name="confirmPassword"
+                                id="confirmPassword"
                                 placeholder="Confirm Password"
                                 onChange={inputHandler}
                             />

@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
@@ -20,6 +21,6 @@ mongoose.connect(DBURI).then((success)=>{
         })
     }
 })
-
+app.use(cors());
 app.use("/api/auth", userRoutes);
 
