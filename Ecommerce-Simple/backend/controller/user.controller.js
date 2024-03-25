@@ -30,6 +30,7 @@ export const signUp = async (req, res) => {
  export const signIn = async (req, res) => {
     try {
         const {email, password} = req.body;
+        
         if (!email || !password) {
             return res.status(400).json({error: 'Email or password is required'});
         }
@@ -50,9 +51,10 @@ export const signUp = async (req, res) => {
         const {password: hashedPassword2, ...rest} = userExists._doc;
         const expireDate =new Date(Date.now() + 60 * 60 * 1000);
 
-        // return res.cookies("access_token", token, {httpOnly:true, expires:expireDate}).status(200).json({message:"Successfully sign in",rest,token});
-       return  res.status(200).json({message:"successful",rest, token});
+        return res.cookie("access_token", token, {httpOnly:true, expires:expireDate}).status(200).json({message:"Successfully sign in",rest,token});
+       //return  res.status(200).json({message:"successful",rest, token});
     } catch (err){
+        console.log(err);
         return res.status(500).json({err: 'Unauthorized'});
     }
 }
